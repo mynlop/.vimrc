@@ -5,9 +5,10 @@ set clipboard+=unnamed  " use the clipboards of vim and win
 syntax enable
 set showcmd
 set ruler
+set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ 12
 set encoding=utf-8
 set showmatch
-set sw=2
+set ts=2 sw=2 et
 set laststatus=2
 " set noshowmode
 " set relativenumber
@@ -18,7 +19,7 @@ call plug#begin('~/.vim/plugged')
 
 " Temas
 Plug 'morhetz/gruvbox'
-Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+"Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 
 " IDE
 Plug 'easymotion/vim-easymotion'
@@ -32,16 +33,28 @@ Plug 'damage220/vim-finder'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'ryanoasis/vim-devicons'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'vim-scripts/matchit.zip'
+Plug 'preservim/nerdcommenter'
+Plug 'kien/rainbow_parentheses.vim'
 
 call plug#end()
 
-" autocmd vimenter * colorscheme gruvbox
+let g:gruvbox_contrast_dark = "hard"
+autocmd vimenter * colorscheme gruvbox 
 " "set background=dark
 let NERDTreeQuitOnOpen=1
 let NERDTreeShowLineNumbers=1
-" let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 1
 " let g:coc_disable_startup_warning = 1 
-colorscheme challenger_deep
+"  colorscheme challenger_deep
+let g:vim_jsx_pretty_colorful_config = 1 
+let g:indent_guides_enable_on_vim_startup = 1
+
+" tabulacion
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=black
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=none
 
 let mapleader = " "
 
@@ -83,3 +96,30 @@ nmap <leader>for  <Plug>(coc-format-selected)
 
 command! Reload execute "source ~/.vimrc"
 command! Config execute ":e ~/.vimrc"
+
+" () [] {}
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+autocmd VimEnter * RainbowParenthesesToggle
+autocmd Syntax * RainbowParenthesesLoadRound
+autocmd Syntax * RainbowParenthesesLoadSquare
+autocmd Syntax * RainbowParenthesesLoadBraces
